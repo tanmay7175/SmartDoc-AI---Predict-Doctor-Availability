@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SmartDoc AI - Doctor Availability Predictor</title>
+    
+    <meta name="description" content="SmartDoc AI helps predict the best time slots for inviting doctors to surveys using an AI-driven model.">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<!-- Hero Section -->
+<div class="hero">
+    <h1>SmartDoc AI - Predict Doctor Availability</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- How It Works -->
+        <div class="col-lg-6">
+            <div class="card p-4">
+                <h3 class="text-primary"><i class="bi bi-info-circle-fill"></i> How It Works</h3>
+                <p>
+                    Our <strong>AI-driven model</strong> predicts <strong>optimal doctor availability</strong> for surveys.
+                    By analyzing historical <strong>login times, specialties, and survey participation trends</strong>, 
+                    we determine the best time to invite doctors.
+                </p>
+                <ul>
+                    <li><i class="bi bi-bar-chart"></i> <strong>Uses AI (Random Forest Model)</strong></li>
+                    <li><i class="bi bi-clock"></i> <strong>Predicts Best Time Slots for Surveys</strong></li>
+                    <li><i class="bi bi-graph-up"></i> <strong>Data-Driven Decision Making</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Try It Out -->
+        <div class="col-lg-6">
+            <div class="card p-4">
+                <h4 class="text-dark"><i class="bi bi-clock-history"></i> Try It Out</h4>
+                <form action="/" method="POST" class="mt-3">
+                    <div class="mb-3">
+                        <label for="hour" class="form-label">Select Time Slot:</label>
+                        <select id="hour" name="hour" class="form-select" required>
+                            <option value="" disabled selected>Choose a time</option>
+                            {% for h in range(24) %}
+                                <option value="{{ h }}">{{ h }}:00 - {{ h }}:59</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-custom w-100"><i class="bi bi-search"></i> Predict</button>
+                </form>
+
+                {% if message %}
+                <div class="alert alert-info mt-3 text-center">
+                    {{ message }}
+                </div>
+                {% endif %}
+
+                {% if download_link %}
+                <div class="text-center mt-3">
+                    <a href="{{ download_link }}" class="btn btn-success"><i class="bi bi-download"></i> Download Result</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2025 SmartDoc AI | Designed for Smart Healthcare | <a href="#">Privacy Policy</a></p>
+</div>
+
+</body>
+</html>
